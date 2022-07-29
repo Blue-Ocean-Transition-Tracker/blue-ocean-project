@@ -1,5 +1,6 @@
-import React from "react";
-import ChatModal from '../Chat/ChatModal';
+import {React, useState} from "react";
+import { Nav } from "./Nav";
+import { Dash } from './Dash'
 
 export default function StudentPage({ userData }) {
 
@@ -7,7 +8,8 @@ export default function StudentPage({ userData }) {
       {userData.admin ?
          <>
             <h1>Admin view</h1>
-            <ChatModal />
+            <Nav />
+            <Dash />
          </>
          :
          <h1>Student view</h1>
