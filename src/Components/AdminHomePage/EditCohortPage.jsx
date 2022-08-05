@@ -4,6 +4,7 @@ import EditableStudent from './EditableStudent'
 import EditableCohort from './EditableCohort'
 import { FiEdit } from 'react-icons/fi'
 import '../../StyleSheets/EditCohortPage.css';
+import CohortActiveToggler from './CohortActiveToggler'
 
 function EditCohortPage({ selectedID }) {
   const { allUsersData, allCohortsData } = useContext(AppContext)
@@ -23,6 +24,7 @@ function EditCohortPage({ selectedID }) {
                   id={selectedID}
                 />
               </div>
+              <CohortActiveToggler initial={x.active} cohortID={x.cohort_id}/>
               <ul>
                 {
                   allUsersData.map(user => {
