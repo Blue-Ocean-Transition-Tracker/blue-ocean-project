@@ -1,11 +1,12 @@
 import {React, useContext, useState, useEffect} from 'react';
 import AppContext from '../../../Context/AppContext'; 
-import { NavItems } from './NavItems';
 import StudentContext from '../../../Context/StudentPageContext';
+import Loading from '../../LoadingDisplay/Loading';
+import { NavItems } from './NavItems';
 
 export const Nav = () => {
   
-  const { allUsersData } = useContext(AppContext)
+  const { allUsersData, setLoading } = useContext(AppContext);
   const {selected , setSelected, student, setStudent} = useContext(StudentContext)
   
   useEffect(() => {
@@ -26,18 +27,29 @@ export const Nav = () => {
       if(element.user_id == parseInt(e.target.id)) setStudent(element)
     });
   }
-  return (
-    <div> 
-      <h1>MCSP-16</h1>
-      <ul>
-      {selected.map((user) => {
-        return(
-          <NavItems user={user} key={user.user_id} changeStudent={changeStudent}  />
-        )
-        
-    })}
-      </ul>
+  if (selected.length <= 0) {
+    setLoading(true);
+    return <Loading />;
 
-    </div>
-  )
+  } else {
+    setLoading(false)
+    return (
+      <div className='sideNav'> 
+
+        <h1>MCSP-16</h1>
+        
+        <div>
+        {selected.map((user) => {
+          return(
+            <NavItems 
+            user={user} 
+            key={user.user_id} 
+            changeStudent={changeStudent}  />
+            ) 
+          })}
+        </div>
+  
+      </div>
+    )
+  }
 }

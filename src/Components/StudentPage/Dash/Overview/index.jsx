@@ -7,9 +7,9 @@ export const Overview = () => {
   const {student} = useContext(StudentContext)
 
   return (
-    <div>
-      <div>
-        <h1> Personal Info </h1>
+    <div className="SDash--Info-card">
+      <div className="infoCard--container">
+        <h1 className="text-left"> Personal Info </h1>
         <p>Email: {student.email}</p>
         <p>{student.branch}</p>
         <p>{student.duty_station}</p>
