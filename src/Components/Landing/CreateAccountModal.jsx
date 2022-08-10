@@ -249,12 +249,12 @@ function CreateAccountModal() {
 
 
   const handleSubmit = (e) => {
-    setFormSubmit(true)
     e.preventDefault();
+    setFormSubmit(true);
     updateUser();
     updateDependentInfo();
-    invokeSetUserData({});
     localStorage.clear();
+    invokeSetUserData({});
     window.setTimeout(()=>{window.location.reload()}, 2500);
   };
 
