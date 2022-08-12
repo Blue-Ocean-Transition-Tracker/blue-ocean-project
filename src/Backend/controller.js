@@ -119,11 +119,13 @@ const login = async (req, res) => {
 
 
 const createNewAdmin = async (req, res) => {
+    const { first, last, email, username, password } = req.body
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     try {
-        const { first, last, email, username, password } = req.body
+
         let client = await pool.connect()
-        let data = await client.query('INSERT INTO users (first, last, email, username, password, admin) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;', [first, last, email, username, password, true])
+        let data = await client.query('INSERT INTO users (first, last, email, username, password, admin) VALUES($1, $2, $3, $4, $5, $6) RETURNING *;', [first, last, email, username, hashedPassword, true])
         res.json(data.rows)
         client.release()
 
@@ -162,7 +164,7 @@ const adminEditStudentByID = async (req, res) => {
 }
 
 const updateOneUserByID = async (req, res) => {
-    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests } = req.body
+    const { first, last, email, username, password, rank, branch, duty_station, taps_complete, leave_start_date, ets_date, planning_to_relocate, city, state, relocate_to_country, relocate_city, relocate_state, relocate_country, has_dependents, highest_education, seeking_further_education, admin, cohort_name, cohort_id, new_user, mos, interests } = req.body
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
